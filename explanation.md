@@ -68,7 +68,7 @@ largest digit placement.
 ### Efficiency
 We are iterating through the input array once, so the time complexity will be
 O(n), where n is the length of the input array. The space complexity is also
-O(n) since we are not sorting in place.
+O(1) since we are sorting in place.
 
 ### Code Design
 We need to sort the array in a single traversal. To do this, we will keep track
@@ -104,10 +104,13 @@ input word. It has O(1) space complexity.
 prefix input. It has O(1) space complexity.
 
 ### Code Design
-Most of the `Trie` and `TrieNode` class methods have typical Tree
-implementations. The `suffix` method has a recursive structure that checks if
-the current node is a word, and if so appends the current suffix to the output.
-Then, we do the same for all the childrend of the current node.
+Most of the `Trie` and `TrieNode` class methods have typical Tree/Trie data
+structure implementations. The `suffix` method usse a recursive algorithm that
+checks if the current node is a word, and if so appends the current suffix to
+the output. Then, we do the same for all the childrend of the current node.
+
+The code design uses a Tree data structure and a recursive algorithm to build
+the suffixes.
 
 ## Problem 6
 
@@ -137,7 +140,6 @@ It has O(1) space complexity.
 `find` has O(n) time complexity, where n is the length of the input path_list.
 It has O(1) space complexity.
 
-
 #### `Router` methods
 
 `split_path` has O(n) time and space complexity. We are looping through the
@@ -154,6 +156,11 @@ O(n) space and time complexity, then `find`, which has O(n) time and O(1) space
 complexity.
 
 ### Code Design
+The `Router` class uses a Trie data structure in the implementation of the
+`RouteTrie` class. Finding and inserting nodes in the tree is accomplished via
+tree traversal algorithm, where we start at the root and iteratively traverse
+the current node's children.
+
 For  the `Router` class the `split_path` method takes a given path and removes
 all the `/` separators to give a list of sub paths. We include some extra logic
 here to remove any empty strings from the list. This ensures `/home/about` and
