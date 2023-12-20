@@ -57,6 +57,8 @@ class Router:
         # return the "not found" handler if you added one
         # bonus points if a path works with and without a trailing slash
         # e.g. /about and /about/ both return the /about handler
+        if not isinstance(path, str):
+            return self.not_found_handler
         path_list = self.split_path(path)
         handler = self.route_trie.find(path_list)
         if handler is None:
@@ -74,15 +76,22 @@ class Router:
         out_list = [x for x in out_list if x]
         return out_list
 
-## Here are some test cases and expected outputs you can use to test your implementation
-
+# Test Cases
 ## create the router and add a route
-router = Router("root handler", "not found handler") # remove the 'not found handler' if you did not implement this
+router = Router("root handler", "not found handler") 
 router.add_handler("/home/about", "about handler")  # add a route
 
-## some lookups with the expected output
-print(router.lookup("/")) # should print 'root handler'
-print(router.lookup("/home")) # should print 'not found handler' or None if you did not implement one
-print(router.lookup("/home/about")) # should print 'about handler'
-print(router.lookup("/home/about/")) # should print 'about handler' or None if you did not handle trailing slashes
-print(router.lookup("/home/about/me")) # should print 'not found handler' or None if you did not implement one
+# Nominal test cases
+print("Pass" if router.lookup("/home/about/") == "about handler" else "Fail") 
+print("Pass" if router.lookup("/home/about") == "about handler" else "Fail") 
+print("Pass" if router.lookup("home/about/") == "about handler" else "Fail") 
+print("Pass" if router.lookup("/home/about") == "about handler" else "Fail") 
+
+print("Pass" if router.lookup("/") == "root handler" else "Fail") 
+print("Pass" if router.lookup("") == "root handler" else "Fail") 
+
+# Edge Case 1: Handler doesn't exist
+print("Pass" if router.lookup("/should/not/exist") == "not found handler" else "Fail") 
+
+# Edge Case 2: Invalid input
+print("Pass" if router.lookup(None) == "not found handler" else "Fail") 

@@ -53,6 +53,8 @@ def rearrange_digits(input_list):
     num1 = ""
     num2 = ""
     while digit_idx >= 0:
+        if sorted[digit_idx] < 0 or sorted[digit_idx] > 9:
+            return None
         if (len(num1) <= len(num2)):
             # The length of the number indicates how many digits we've filled.
             # If the length of num1 is lower than num2 then num1 has a higher
@@ -63,16 +65,29 @@ def rearrange_digits(input_list):
             num2 += str(sorted[digit_idx])
         digit_idx -= 1
     # Convert strings to integers and return the two numbers.
+    if not num1 or not num2:
+        # Return None if one the strings is empty
+        return None
     return [int(num1), int(num2)]
 
 def test_function(test_case):
     output = rearrange_digits(test_case[0])
     solution = test_case[1]
-    if sum(output) == sum(solution):
+    if output == solution:
         print("Pass")
     else:
         print("Fail")
 
-test_function([[1, 2, 3, 4, 5], [542, 31]])
+# Test Cases
+# Nominal test cases
+test_function([[1, 2, 3, 4, 5], [531, 42]])
 test_function([[4, 6, 2, 5, 9, 8], [964, 852]])
-test_function([[1,1], [1, 1]])
+
+# Edge case 1: Input outside valid range
+# Invalid inputs outside of the range [0,9] should return None.
+test_function([[1,10], None])
+test_function([[-1,1], None])
+
+# Edge case 2: Array length is one
+# For an array with a single element, expect None output
+test_function([[1], None])

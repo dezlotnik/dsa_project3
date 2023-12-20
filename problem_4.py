@@ -42,6 +42,20 @@ def test_function(test_case):
     else:
         print("Fail")
 
+# Test Cases
+# Nominal Test case
 test_function([0, 0, 2, 2, 2, 1, 1, 1, 2, 0, 2])
 test_function([2, 1, 2, 0, 0, 2, 1, 0, 1, 0, 0, 2, 2, 2, 1, 2, 0, 0, 0, 2, 1, 0, 2, 0, 0, 1])
 test_function([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2])
+
+# Edge case 1:
+# Already sorted
+test_function([0, 1, 1, 1, 1, 2])
+
+# Edge case 2:
+# No 1s
+test_function([2, 0])
+
+# Edge case 3:
+# Single number
+test_function([0])

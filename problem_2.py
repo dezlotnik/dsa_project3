@@ -69,9 +69,18 @@ def test_function(test_case):
     else:
         print("Fail")
 
+# Test Cases
+# Nominal test cases
 test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 6])
 test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 8])
 test_function([[6, 7, 8, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 10])
+
+# Edge case 1: Already sorted array
+# Test that the algorithm works if the array is already sorted
 test_function([[1, 2, 3, 4, 5, 6], 6])
+
+# Edge case 2: Not in array
+# Test the algorithm returns -1 when the target number is not in the array.
+test_function([[6, 7, 8, 1, 2, 3, 4], 10])
